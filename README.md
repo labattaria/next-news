@@ -18,7 +18,7 @@ This is the NextNews Next.js + React app
 
 Next News is a modern news application built with Next.js. It allows you to stay up to date with the latest news and explore an archive of news from previous years and months. With smooth navigation, fast loading, and a clean interface, reading the news becomes simple and enjoyable.
 
-The app in this repo is hosted on [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](#), hosting public URL:
+The app in this repo is hosted on [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](#), hosting public URL: [https://next-news-indol.vercel.app/](https://next-news-indol.vercel.app/)
 
 But you can use this app manually on your local machine
 

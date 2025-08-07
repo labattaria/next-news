@@ -18,7 +18,7 @@
 
 Next News — це сучасний новинний додаток, розроблений на основі Next.js. Він дозволяє бути в курсі останніх подій, а також переглядати архів новин за попередні роки та місяці. Зручна навігація, швидке завантаження та чистий інтерфейс роблять читання новин простим і приємним.
 
-Додаток у цьому репозиторії розгорнуто на сайтi [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](#), за цією URL-адресою:
+Додаток у цьому репозиторії розгорнуто на сайтi [![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](#), за цією URL-адресою: [https://next-news-indol.vercel.app/](https://next-news-indol.vercel.app/)
 
 Але ви можете використовувати цей додаток вручну на своєму локальному комп’ютері
 

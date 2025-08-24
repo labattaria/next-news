@@ -1,10 +1,17 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getNewsItem } from "@/lib/news";
+import type { News } from "@prisma/client";
 
-export default async function NewsDetailPage({ params }) {
+interface NewsDetailPageProps {
+  params: {
+    newsSlug: string;
+  };
+}
+
+export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   const newsSlug = params.newsSlug;
-  const newsItem = await getNewsItem(newsSlug);
+  const newsItem: News | null = await getNewsItem(newsSlug);
 
   if (!newsItem) {
     notFound();

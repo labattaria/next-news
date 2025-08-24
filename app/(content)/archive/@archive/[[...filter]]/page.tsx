@@ -7,8 +7,14 @@ import {
   getNewsForYearAndMonth,
 } from "@/lib/news";
 import NewsList from "@/components/news-list";
+import type { News } from "@prisma/client";
 
-async function FilterHeader({ year, month }) {
+interface FilterProps {
+  year?: string;
+  month?: string;
+}
+
+async function FilterHeader({ year, month }: FilterProps) {
   const availableYears = await getAvailableNewsYears();
   const availableMonths = year ? await getAvailableNewsMonths(year) : [];
 
@@ -19,7 +25,7 @@ async function FilterHeader({ year, month }) {
     throw new Error("Invalid filter.");
   }
 
-  let links = availableYears;
+  let links: string[] = availableYears;
 
   if (year && !month) {
     links = availableMonths;
@@ -48,8 +54,8 @@ async function FilterHeader({ year, month }) {
   );
 }
 
-async function FilteredNews({ year, month }) {
-  let news;
+async function FilteredNews({ year, month }: FilterProps) {
+  let news: News[] | undefined;
 
   if (year && !month) {
     news = await getNewsForYear(year);
@@ -57,16 +63,20 @@ async function FilteredNews({ year, month }) {
     news = await getNewsForYearAndMonth(year, month);
   }
 
-  let newsContent = <p>No news found for the selected period.</p>;
-
   if (news && news.length > 0) {
-    newsContent = <NewsList news={news} />;
+    return <NewsList news={news} />;
   }
 
-  return newsContent;
+  return <p>No news found for the selected period.</p>;
 }
 
-export default async function FilteredNewsPage({ params }) {
+interface FilteredNewsPageProps {
+  params: {
+      filter?: string[];
+  }
+}
+
+export default async function FilteredNewsPage({ params }: FilteredNewsPageProps) {
   const filter = params.filter;
   const selectedYear = filter?.[0];
   const selectedMonth = filter?.[1];

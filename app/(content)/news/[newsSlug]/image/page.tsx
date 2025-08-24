@@ -1,9 +1,16 @@
 import { getNewsItem } from "@/lib/news";
 import { notFound } from "next/navigation";
+import type { News } from "@prisma/client";
 
-export default async function ImagePage({ params }) {
+interface ImagePageProps {
+  params: {
+    newsSlug: string;
+  };
+}
+
+export default async function ImagePage({ params }: ImagePageProps) {
   const newsItemSlug = params.newsSlug;
-  const newsItem = await getNewsItem(newsItemSlug);
+  const newsItem: News | null = await getNewsItem(newsItemSlug);
 
   if (!newsItem) {
     notFound();

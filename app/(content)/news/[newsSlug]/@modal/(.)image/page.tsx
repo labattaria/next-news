@@ -1,9 +1,16 @@
 import ModalBackdrop from "@/components/modal-backdrop";
 import { getNewsItem } from "@/lib/news";
+import { News } from "@prisma/client";
 import { notFound } from "next/navigation";
 
-export default async function InterceptedImagePage({ params }) {
-  const newsItem = await getNewsItem(params.newsSlug);
+interface InterceptedImagePageProps {
+  params: {
+    newsSlug: string;
+  };
+}
+
+export default async function InterceptedImagePage({ params }: InterceptedImagePageProps) {
+  const newsItem: News | null = await getNewsItem(params.newsSlug);
 
   if (!newsItem) {
     notFound();
@@ -17,7 +24,7 @@ export default async function InterceptedImagePage({ params }) {
           <img
             src={`/images/news/${newsItem.image}`}
             alt={newsItem.title}
-            width="736"
+            width={736}
           />
         </div>
       </dialog>

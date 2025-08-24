@@ -1,6 +1,11 @@
 import Link from "next/link";
+import type { News } from "@prisma/client";
 
-export default function NewsList({ news }) {
+interface NewsListProps {
+  news: News[];
+}
+
+export default function NewsList({ news }: NewsListProps) {
   return (
     <ul className="news-list">
       {news.map((newsItem) => (

@@ -1,12 +1,13 @@
 import { prisma } from "./prisma";
+import type { News } from "@prisma/client";
 
-export async function getAllNews() {
+export async function getAllNews(): Promise<News[]> {
   const news = await prisma.news.findMany();
 
   return news;
 }
 
-export async function getNewsItem(slug) {
+export async function getNewsItem(slug: string): Promise<News | null> {
   const newsItem = await prisma.news.findUnique({
     where: { slug },
   });
@@ -14,7 +15,7 @@ export async function getNewsItem(slug) {
   return newsItem;
 }
 
-export async function getLatestNews() {
+export async function getLatestNews(): Promise<News[]> {
   const latestNews = await prisma.news.findMany({
     orderBy: { date: "desc" },
     take: 3,
@@ -23,7 +24,7 @@ export async function getLatestNews() {
   return latestNews;
 }
 
-export async function getAvailableNewsYears() {
+export async function getAvailableNewsYears(): Promise<string[]> {
   const years = await prisma.news.findMany({
     select: { date: true },
   });
@@ -35,7 +36,7 @@ export async function getAvailableNewsYears() {
   return distinctYears;
 }
 
-export async function getAvailableNewsMonths(year) {
+export async function getAvailableNewsMonths(year: string): Promise<string[]> {
   const news = await prisma.news.findMany({
     where: {
       date: {
@@ -55,7 +56,7 @@ export async function getAvailableNewsMonths(year) {
   return months;
 }
 
-export async function getNewsForYear(year) {
+export async function getNewsForYear(year: string): Promise<News[]> {
   const news = await prisma.news.findMany({
     where: {
       date: {
@@ -69,7 +70,7 @@ export async function getNewsForYear(year) {
   return news;
 }
 
-export async function getNewsForYearAndMonth(year, month) {
+export async function getNewsForYearAndMonth(year: string, month: string): Promise<News[]> {
   const start = new Date(`${year}-${month}-01`);
   const end = new Date(start);
   end.setMonth(end.getMonth() + 1);

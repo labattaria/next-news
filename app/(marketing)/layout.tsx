@@ -14,8 +14,8 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html className="font-merriweather" lang="en">
+      <body className="m-0 bg-[#181817] text-[#e5e5e1]">{children}</body>
     </html>
   );
 }

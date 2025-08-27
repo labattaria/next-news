@@ -8,7 +8,26 @@ html {
   font-family: 'Merriweather', serif;
 }
 
-body {
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+h1 {
+  display: block;
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+
+p {
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+@import "tailwindcss";
+
+/* body {
   margin: 0;
   background-color: #181817;
   color: #e5e5e1;
@@ -18,9 +37,9 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
-}
+} */
 
-#page {
+/* #page {
   width: 90%;
   max-width: 60rem;
   margin: 2rem auto;
@@ -192,4 +211,4 @@ ul {
 .error {
   text-align: center;
   margin-top: 3rem;
-}
+} */

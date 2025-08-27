@@ -7,8 +7,14 @@ import {
   getNewsForYearAndMonth,
 } from "@/lib/news";
 import NewsList from "@/components/news-list";
+import type { News } from "@prisma/client";
 
-async function FilterHeader({ year, month }) {
+interface FilterProps {
+  year?: string;
+  month?: string;
+}
+
+async function FilterHeader({ year, month }: FilterProps) {
   const availableYears = await getAvailableNewsYears();
   const availableMonths = year ? await getAvailableNewsMonths(year) : [];
 
@@ -19,7 +25,7 @@ async function FilterHeader({ year, month }) {
     throw new Error("Invalid filter.");
   }
 
-  let links = availableYears;
+  let links: string[] = availableYears;
 
   if (year && !month) {
     links = availableMonths;
@@ -32,13 +38,25 @@ async function FilterHeader({ year, month }) {
   return (
     <header id="archive-header">
       <nav>
-        <ul>
+        <ul className="flex gap-4 mb-8 m-0 p-0">
           {links.map((link) => {
             const href = year ? `/archive/${year}/${link}` : `/archive/${link}`;
 
+            const isActive =
+              (year && !month && link === month) ||
+              (!year && link === year) ||
+              (year && month && link === month);
+
             return (
               <li key={link}>
-                <Link href={href}>{link}</Link>
+                <Link
+                  href={href}
+                  className={`font-bold text-[1.25rem] rounded-sm no-underline ${
+                    isActive ? "text-[#e5e5e1] hover:text-[#e5e5e1]" : "text-[#b0b0a6] hover:text-[#e5e5e1]"
+                  }`}
+                >
+                  {link}
+                </Link>
               </li>
             );
           })}
@@ -48,8 +66,8 @@ async function FilterHeader({ year, month }) {
   );
 }
 
-async function FilteredNews({ year, month }) {
-  let news;
+async function FilteredNews({ year, month }: FilterProps) {
+  let news: News[] | undefined;
 
   if (year && !month) {
     news = await getNewsForYear(year);
@@ -57,23 +75,27 @@ async function FilteredNews({ year, month }) {
     news = await getNewsForYearAndMonth(year, month);
   }
 
-  let newsContent = <p>No news found for the selected period.</p>;
-
   if (news && news.length > 0) {
-    newsContent = <NewsList news={news} />;
+    return <NewsList news={news} />;
   }
 
-  return newsContent;
+  return <p className="my-4">No news found for the selected period.</p>;
 }
 
-export default async function FilteredNewsPage({ params }) {
+interface FilteredNewsPageProps {
+  params: {
+      filter?: string[];
+  }
+}
+
+export default async function FilteredNewsPage({ params }: FilteredNewsPageProps) {
   const filter = params.filter;
   const selectedYear = filter?.[0];
   const selectedMonth = filter?.[1];
 
   return (
     <>
-      <Suspense fallback={<p>Loading filter...</p>}>
+      <Suspense fallback={<p className="mb-4">Loading filter...</p>}>
         <FilterHeader year={selectedYear} month={selectedMonth} />
       </Suspense>
       <Suspense fallback={<p>Loading news...</p>}>

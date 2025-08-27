@@ -1,6 +1,15 @@
-import { prisma } from "../lib/prisma.js";
+import { prisma } from "../lib/prisma";
 
-const DUMMY_NEWS = [
+type NewsSeed = {
+  id: string;
+  slug: string;
+  title: string;
+  image: string;
+  date: string;
+  content: string;
+};
+
+const DUMMY_NEWS: NewsSeed[] = [
   {
     id: "n1",
     slug: "will-ai-replace-humans",
@@ -48,7 +57,7 @@ const DUMMY_NEWS = [
   },
 ];
 
-async function seed() {
+async function seed(): Promise<void> {
   console.log("Start seeding...");
 
   for (const news of DUMMY_NEWS) {

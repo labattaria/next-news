@@ -21,14 +21,14 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
     <article className="news-article">
       <header>
         <Link href={`/news/${newsItem.slug}/image`}>
-          <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} />
+          <img src={`/images/news/${newsItem.image}`} alt={newsItem.title} className="w-28 mb-4 rounded-sm" />
         </Link>
-        <h1>{newsItem.title}</h1>
+        <h1 className="text-[1.5rem] mt-9 mb-5 mx-0">{newsItem.title}</h1>
         <time dateTime={newsItem.date.toISOString()}>
           {newsItem.date.toDateString()}
         </time>
       </header>
-      <p>{newsItem.content}</p>
+      <p className="my-4">{newsItem.content}</p>
     </article>
   );
 }

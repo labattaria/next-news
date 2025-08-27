@@ -17,17 +17,14 @@ export default async function InterceptedImagePage({ params }: InterceptedImageP
   }
 
   return (
-    <>
-      <ModalBackdrop />
-      <dialog className="modal" open>
-        <div className="fullscreen-image">
-          <img
-            src={`/images/news/${newsItem.image}`}
-            alt={newsItem.title}
-            width={736}
-          />
-        </div>
-      </dialog>
-    </>
+    <ModalBackdrop>
+      <div className="flex justify-center">
+        <img
+          src={`/images/news/${newsItem.image}`}
+          alt={newsItem.title}
+          className="max-h-[80vh] w-auto object-contain"
+        />
+      </div>
+    </ModalBackdrop>
   );
 }

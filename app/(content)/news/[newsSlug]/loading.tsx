@@ -1,3 +1,3 @@
 export default function LoadingNewsItem() {
-  return <p>Loading news item...</p>;
+  return <p className="mb-4">Loading news item...</p>;
 }

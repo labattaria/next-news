@@ -7,7 +7,7 @@ export default async function LatestNewsPage() {
 
   return (
     <>
-      <h2>Latest News</h2>
+      <h2 className="my-[20px] text-[1.5rem] font-bold">Latest News</h2>
       <NewsList news={latestNews} />
     </>
   );

@@ -38,13 +38,25 @@ async function FilterHeader({ year, month }: FilterProps) {
   return (
     <header id="archive-header">
       <nav>
-        <ul>
+        <ul className="flex gap-4 mb-8 m-0 p-0">
           {links.map((link) => {
             const href = year ? `/archive/${year}/${link}` : `/archive/${link}`;
 
+            const isActive =
+              (year && !month && link === month) ||
+              (!year && link === year) ||
+              (year && month && link === month);
+
             return (
               <li key={link}>
-                <Link href={href}>{link}</Link>
+                <Link
+                  href={href}
+                  className={`font-bold text-[1.25rem] rounded-sm no-underline ${
+                    isActive ? "text-[#e5e5e1] hover:text-[#e5e5e1]" : "text-[#b0b0a6] hover:text-[#e5e5e1]"
+                  }`}
+                >
+                  {link}
+                </Link>
               </li>
             );
           })}
@@ -67,7 +79,7 @@ async function FilteredNews({ year, month }: FilterProps) {
     return <NewsList news={news} />;
   }
 
-  return <p>No news found for the selected period.</p>;
+  return <p className="my-4">No news found for the selected period.</p>;
 }
 
 interface FilteredNewsPageProps {
@@ -83,7 +95,7 @@ export default async function FilteredNewsPage({ params }: FilteredNewsPageProps
 
   return (
     <>
-      <Suspense fallback={<p>Loading filter...</p>}>
+      <Suspense fallback={<p className="mb-4">Loading filter...</p>}>
         <FilterHeader year={selectedYear} month={selectedMonth} />
       </Suspense>
       <Suspense fallback={<p>Loading news...</p>}>

@@ -6,9 +6,9 @@ interface FilterErrorProps {
 
 export default function FilterError({ error }: FilterErrorProps) {
   return (
-    <div id="error">
-      <h2>An error occurred!</h2>
-      <p>{error.message}</p>
+    <div className="text-center mt-12">
+      <h2 className="text-4xl font-bold">An error occurred!</h2>
+      <p className="mt-4 text-[#bcbcb7] text-lg">{error.message}</p>
     </div>
   );
 }
